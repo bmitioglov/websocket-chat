@@ -11,8 +11,8 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'idea'
 
 jar {
     baseName = 'gs-messaging-stomp-websocket'
@@ -26,6 +26,7 @@ repositories {
 }
 
 dependencies {
+    compile 'org.springframework:spring-context:4.3.7.RELEASE'
     compile("org.springframework.boot:spring-boot-starter-websocket")
     compile("org.webjars:webjars-locator")
     compile("org.webjars:sockjs-client:1.0.2")
