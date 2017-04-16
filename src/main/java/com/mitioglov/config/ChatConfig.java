@@ -1,16 +1,6 @@
 package com.mitioglov.config;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Description;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.web.socket.config.WebSocketMessageBrokerStats;
 
 
 @Configuration
