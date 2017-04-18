@@ -4,16 +4,19 @@ package com.mitioglov.config;
  * Created by Boris Mitioglov on 16/04/2017.
  */
 
-import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 @Configuration
 @EnableWebSecurity
+@EnableRedisHttpSession
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -24,24 +27,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .formLogin()
-                .loginPage("/index.html")
-                .defaultSuccessUrl("/chat.html")
-                .permitAll()
-                .and()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/chat")
+                    .permitAll()
+                    .and()
                 .logout()
-                .logoutSuccessUrl("/index.html")
-                .permitAll()
-                .and()
+                    .logoutSuccessUrl("/")
+                    .permitAll()
+                    .and()
                 .authorizeRequests()
-                .antMatchers("/js/**", "/lib/**", "/images/**", "/css/**", "/index.html", "/").permitAll()
-                .antMatchers("/websocket").hasRole("ADMIN")
-                .anyRequest().authenticated();
+                    .antMatchers("/", "/home").permitAll()
+                    .antMatchers("/js/**", "/lib/**", "/images/**", "/css/**", "/index.html", "/").permitAll()
+                    .antMatchers("/websocket").hasRole("ADMIN")
+                    .anyRequest().authenticated();
 
     }
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth
+                .inMemoryAuthentication()
+                .withUser("user").password("password").roles("USER");
 //        auth.authenticationProvider(new AuthenticationProvider() {
 //
 //            @Override
@@ -51,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //
 //            @Override
 //            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+//                System.out.println("[TEST] Authentication" + authentication);
 //                UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
 //
 //                List<GrantedAuthority> authorities = SECURE_ADMIN_PASSWORD.equals(token.getCredentials()) ?
@@ -59,6 +67,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                return new UsernamePasswordAuthenticationToken(token.getName(), token.getCredentials(), authorities);
 //            }
 //        });
-//    }
+    }
 }
 

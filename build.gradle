@@ -23,20 +23,27 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven { url "http://repo.spring.io/libs-release" }
+    maven { url "http://repo.spring.io/milestone" }
+    maven { url "http://repo.spring.io/snapshot" }
+}
+
+ext {
+    springSessionVersion = '1.1.0.M1'
 }
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-data-redis")
-    compile 'org.springframework:spring-context:4.3.7.RELEASE'
     compile("org.springframework.boot:spring-boot-starter-websocket")
+    compile("org.springframework.session:spring-session:$springSessionVersion")
     compile("org.webjars:webjars-locator")
     compile("org.webjars:sockjs-client:1.0.2")
     compile("org.webjars:stomp-websocket:2.3.3")
     compile("org.webjars:bootstrap:3.3.7")
     compile("org.webjars:jquery:3.1.0")
+    compile("com.github.kstyrc:embedded-redis:0.6")
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
