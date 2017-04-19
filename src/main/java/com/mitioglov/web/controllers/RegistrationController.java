@@ -46,6 +46,11 @@ public class RegistrationController {
         }
     }
 
+    @RequestMapping(value = "/registered", method = RequestMethod.GET)
+    public String registrationSuccess(WebRequest request, Model model) {
+        return "registered";
+    }
+
     private User createUserAccount(UserDto accountDto, BindingResult result) {
         User toRegisterUser = new User();
         toRegisterUser.setEmail(accountDto.getEmail());
@@ -53,7 +58,7 @@ public class RegistrationController {
         toRegisterUser.setLastName(accountDto.getLastName());
         toRegisterUser.setNickname(accountDto.getEmail());
         toRegisterUser.setPassword(accountDto.getPassword());
-//        userService.addUser(toRegisterUser);
+//        userService.addUser(toRegisterUser); //TODO
         return toRegisterUser;
     }
 }
