@@ -36,7 +36,8 @@ public class RedisConfig {
 		@Override
 		public void afterPropertiesSet() throws Exception {
 
-			redisServer = new RedisServer(Protocol.DEFAULT_PORT);
+//			redisServer = new RedisServer(Protocol.DEFAULT_PORT);
+			redisServer = RedisServer.builder().setting("bind 127.0.0.1").build();
 			redisServer.start();
 		}
 

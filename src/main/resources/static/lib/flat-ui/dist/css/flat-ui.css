@@ -5781,6 +5781,7 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   background-size: 940px 778px;
   color: #ffffff;
   margin-bottom: 77px;
+  margin-top: 77px;
   padding: 38px 38px 267px;
   position: relative;
 }

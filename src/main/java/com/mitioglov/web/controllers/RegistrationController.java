@@ -53,7 +53,7 @@ public class RegistrationController {
         toRegisterUser.setLastName(accountDto.getLastName());
         toRegisterUser.setNickname(accountDto.getEmail());
         toRegisterUser.setPassword(accountDto.getPassword());
-        userService.addUser(toRegisterUser);
+//        userService.addUser(toRegisterUser);
         return toRegisterUser;
     }
 }

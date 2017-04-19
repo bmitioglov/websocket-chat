@@ -1,16 +1,12 @@
 package com.mitioglov.model.dao;
 
 import com.mitioglov.model.domain.User;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
+import javax.transaction.Transactional;
 
-public interface UserDAO {
-
-    void addUser(User user);
-
-    List<User> listUsers();
-
-    void removeUser(Integer id);
+@Transactional
+public interface UserDAO extends CrudRepository<User, Integer> {
 
     User findByEmail(String email);
 
