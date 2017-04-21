@@ -2,58 +2,53 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII"/>
+    <!--<link href="/lib/flat-ui/dist/css/flat-ui.css" type="text/css" rel="stylesheet"/>-->
+    <link href="/lib/flat-ui/dist/css/vendor/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link href="/lib/flat-ui/dist/css/flat-ui.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/registration_form.css" type="text/css" rel="stylesheet"/>
     <title>Registration</title>
 </head>
 <body>
-<form th:object="${user}" method="POST" enctype="utf8">
-    <table>
-        <tr>
-            <td>
-                <label>First name</label>
-            </td>
-            <td>
-                <input th:field="*{firstName}" class="form-control" required="required" placeholder="First Name"/>
-                <!--<form:input path="firstName" value="" /></td>-->
-            <!--<form:errors path="firstName" element="div"/>-->
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Last Name</label>
-            </td>
-            <td>
-                <input th:field="*{lastName}" class="form-control" required="required" placeholder="Last Name"/>
-                <!--<form:input path="lastName" value="" /> -->
-            </td>
-            <!--<form:errors path="lastName" element="div" />-->
-        </tr>
-        <tr>
-            <td>
-                <label>Email</label>
-            </td>
-            <td>
-                <input th:field="*{email}" class="form-control" required="required" placeholder="Email"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Password</label>
-            </td>
-            <td>
-                <input th:field="*{password}" class="form-control" required="required" placeholder="Password"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Confirm password</label>
-            </td>
-            <td>
-                <input th:field="*{matchingPassword}" class="form-control" required="required" placeholder="Matching password"/>
-            </td>
-        </tr>
-    </table>
-    <button type="submit" class="btn btn-primary btn-lg">Sign up</button>
-</form>
-<br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+        <form th:object="${user}" method="POST" enctype="utf8">
+            <div class="login-form">
+                <div class="form-group">
+                    <label class="login-field-icon fui-user"></label>
+                    <input class="form-control login-field" th:field="*{firstName}" type="text"
+                           required="required" placeholder="First Name"/>
+                </div>
+
+                <div class="form-group">
+                     <label class="login-field-icon fui-user"></label>
+                     <input class="form-control login-field" th:field="*{lastName}" type="text"
+                            required="required" placeholder="Last Name"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="login-field-icon fui-mail"></label>
+                    <input class="form-control login-field" th:field="*{email}" type="email"
+                           required="required" placeholder="Email"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="login-field-icon fui-lock"></label>
+                    <input class="form-control login-field" th:field="*{password}" type="password"
+                           required="required" placeholder="Password"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="login-field-icon fui-lock"></label>
+                    <input class="form-control login-field" th:field="*{matchingPassword}" type="password"
+                           required="required" placeholder="Matching password"/>
+                </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Sign up</button>
+            </div>
+        </form>
+    </div>
+        </div>
+    </div>
+    <br/>
 </body>
 </html>
