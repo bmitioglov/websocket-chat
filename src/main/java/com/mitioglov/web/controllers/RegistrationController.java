@@ -4,6 +4,8 @@ import com.mitioglov.model.domain.User;
 import com.mitioglov.dto.UserDto;
 import com.mitioglov.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,8 +30,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ModelAndView registerUserAccount
-            (@ModelAttribute("user") UserDto accountDto,
+    public ModelAndView registerUserAccount(@ModelAttribute("user") UserDto accountDto,
              BindingResult result, WebRequest request, Errors errors) {
         User registered = new User();
         if (!result.hasErrors()) {
@@ -57,8 +58,9 @@ public class RegistrationController {
         toRegisterUser.setFirstName(accountDto.getFirstName());
         toRegisterUser.setLastName(accountDto.getLastName());
         toRegisterUser.setNickname(accountDto.getEmail());
-        toRegisterUser.setPassword(accountDto.getPassword());
-//        userService.addUser(toRegisterUser); //TODO
-        return toRegisterUser;
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(accountDto.getPassword());
+        toRegisterUser.setPassword(hashedPassword);
+        return userService.save(toRegisterUser);
     }
 }
