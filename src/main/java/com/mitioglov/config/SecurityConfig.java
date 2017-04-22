@@ -55,7 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
-    @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider
                 = new DaoAuthenticationProvider();
@@ -64,35 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
-    @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(11);
     }
-
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//
-//        auth
-//                .inMemoryAuthentication()
-//                .withUser("user").password("password").roles("USER");
-////        auth.authenticationProvider(new AuthenticationProvider() {
-////
-////            @Override
-////            public boolean supports(Class<?> authentication) {
-////                return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
-////            }
-////
-////            @Override
-////            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-////                System.out.println("[TEST] Authentication" + authentication);
-////                UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
-////
-////                List<GrantedAuthority> authorities = SECURE_ADMIN_PASSWORD.equals(token.getCredentials()) ?
-////                        AuthorityUtils.createAuthorityList("ROLE_ADMIN") : null;
-////
-////                return new UsernamePasswordAuthenticationToken(token.getName(), token.getCredentials(), authorities);
-////            }
-////        });
-//    }
 }
 
